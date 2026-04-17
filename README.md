@@ -1,16 +1,46 @@
-# React + Vite
+# 📝 Odin Blog API — Author Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live Demo:** https://odin-blog-api-author.onrender.com/  
+🔗 **Backend Repo:** https://github.com/curreesan/odin-blog-api-backend
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Overview
 
-## React Compiler
+The **Author Dashboard** is a frontend application built for managing blog posts in the Odin Blog API project. It allows authenticated authors to create, edit, delete, and manage the status of their posts.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This app works alongside the backend API and provides a clean interface for content management.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 🔐 **Authentication (JWT-based)**
+- 🧑‍💻 **Author-only protected routes**
+- 📝 **Create new posts**
+- ✏️ **Edit existing posts**
+- 🗑️ **Delete posts**
+- 🔄 **Toggle post status**
+  - `DRAFT → PUBLISHED → ARCHIVED`
+- 📊 **Dashboard view of all author posts**
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+
+- React (Vite)
+- React Router
+- Context API (Auth management)
+- Fetch API
+
+### Backend (Connected API)
+
+- Node.js
+- Express
+- Prisma ORM
+- PostgreSQL
+- JWT Authentication
+
+---
