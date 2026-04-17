@@ -9,6 +9,7 @@ import {
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import NewPost from "./pages/NewPost.jsx";
+import EditPost from "./pages/EditPost.jsx";
 
 //Components
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -20,15 +21,10 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
 
-        <Route
-          element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
-          }
-        >
+        <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/posts/new" element={<NewPost />} />
+          <Route path="/posts/:id" element={<EditPost />} />
         </Route>
 
         <Route path="/" element={<Navigate to="/login" replace />} />
