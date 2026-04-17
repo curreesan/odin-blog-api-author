@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 
 import "../styles/pages/EditPost.css";
 
-const BASE_URL = import.meta.env.VITE_LOCAL_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function EditPost() {
   const { id } = useParams();

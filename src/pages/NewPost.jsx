@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 
 import "../styles/pages/NewPost.css";
 
-const BASE_URL = import.meta.env.VITE_LOCAL_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function NewPost() {
   const [title, setTitle] = useState("");
@@ -62,7 +62,6 @@ function NewPost() {
 
       <form onSubmit={handleSubmit} className="new-post-form">
         <div className="form-grid">
-          {/* Row 1: Title */}
           <label className="form-label">Title</label>
           <input
             type="text"
@@ -72,7 +71,6 @@ function NewPost() {
             required
           />
 
-          {/* Row 2: Content */}
           <label className="form-label">Content</label>
           <textarea
             value={content}
@@ -82,7 +80,6 @@ function NewPost() {
             required
           />
 
-          {/* Row 3: Status + Buttons */}
           <label className="form-label">Status</label>
           <div className="status-and-actions">
             <select value={status} onChange={(e) => setStatus(e.target.value)}>

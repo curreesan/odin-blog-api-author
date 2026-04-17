@@ -12,7 +12,6 @@ import NewPost from "./pages/NewPost.jsx";
 import EditPost from "./pages/EditPost.jsx";
 
 //Components
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Layout from "./components/Layout.jsx";
 
 function App() {
