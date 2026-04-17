@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+
+import "../styles/pages/Login.css";
+
 const BASE_URL = import.meta.env.VITE_LOCAL_API_URL;
 
 function Login() {
@@ -21,20 +24,18 @@ function Login() {
       const response = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
-      console.log("login data", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
 
       login(data.token, data.user);
-
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);
@@ -45,39 +46,47 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h2>Login to your Blog</h2>
+      <div className="login-box">
+        <h2>Author Only Login</h2>
 
-      {error && <p className="error-message">{error}</p>}
+        {error && <p className="error-message">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-grid">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
 
-        <div className="form-group">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+            <div className="button-container">
+              <button type="submit" disabled={loading} className="login-btn">
+                {loading ? "Logging in..." : "Login"}
+              </button>
+            </div>
 
-      <p className="signup-link">
-        Don't have an account? <a href="#">Sign up</a> (coming soon)
-      </p>
+            <p className="signup-link">
+              Don't have an account?{" "}
+              <a href="#" className="signup-link-text">
+                Sign up
+              </a>{" "}
+              (coming soon)
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

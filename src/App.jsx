@@ -24,7 +24,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/posts/new" element={<NewPost />} />
-          <Route path="/posts/:id" element={<EditPost />} />
+          <Route path="/posts/:id/edit" element={<EditPost />} />
         </Route>
 
         <Route path="/" element={<Navigate to="/login" replace />} />

@@ -1,0 +1,107 @@
+/* =============== New Post Page =============== */
+
+.new-post-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.success-message {
+  text-align: center;
+  color: #10b981;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.error-message {
+  text-align: center;
+  color: #ef4444;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+/* 2-Column Grid */
+.new-post-form .form-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px 60px;
+  align-items: start;
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 1.1rem;
+  padding-top: 12px;
+}
+
+/* Inputs */
+.form-grid input,
+.form-grid textarea,
+.form-grid select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 1.02rem;
+  background-color: #fff;
+}
+
+.form-grid textarea {
+  resize: vertical;
+  min-height: 460px;
+  line-height: 1.65;
+}
+
+.form-grid select {
+  cursor: pointer;
+}
+
+/* Status + Actions Container (Row 3) */
+.status-and-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.form-actions button {
+  padding: 13px 34px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.04rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.cancel-btn:hover {
+  background-color: #d1d5db;
+}
+
+.submit-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.submit-btn:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}

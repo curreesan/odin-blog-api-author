@@ -1,0 +1,117 @@
+/* =============== Login Page =============== */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+  padding: 20px;
+}
+
+.login-box {
+  background-color: white;
+  padding: 50px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  color: #1e2937;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  color: #ef4444;
+  background-color: #fee2e2;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Grid Layout: 2 columns */
+.login-form .form-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 24px 20px;
+  align-items: center;
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 1.05rem;
+  text-align: right;
+  padding-right: 10px;
+}
+
+/* Inputs */
+.form-grid input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1.02rem;
+  background-color: #fff;
+}
+
+.form-grid input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Button Container - spans both columns */
+.button-container {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.login-btn:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+/* Signup Link - spans both columns */
+.signup-link {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 20px;
+  color: #64748b;
+  font-size: 0.98rem;
+}
+
+.signup-link-text {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-link-text:hover {
+  text-decoration: underline;
+}

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 
+import "../styles/pages/Dashboard.css";
+
 const BASE_URL = import.meta.env.VITE_LOCAL_API_URL;
 
 function Dashboard() {
@@ -32,7 +34,6 @@ function Dashboard() {
         });
 
         const data = await response.json();
-        console.log("Response Data:", data);
 
         if (!response.ok) {
           throw new Error(data.message || `Server error: ${response.status}`);
@@ -116,8 +117,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <h1>My Dashboard</h1>
-
       {posts.length === 0 ? (
         <p>You don't have any posts yet. Create your first one!</p>
       ) : (
@@ -126,38 +125,41 @@ function Dashboard() {
             <div key={post.id} className="post-card">
               <h3>{post.title}</h3>
 
-              <p className="post-content">
-                {post.content?.substring(0, 500)}...
-              </p>
+              <p className="post-content">{post.content?.substring(0, 500)}</p>
 
-              <span className={`status-badge ${post.status.toLowerCase()}`}>
-                {post.status}
-              </span>
+              <div className="post-meta">
+                <div className="meta-left">
+                  <span className={`status-badge ${post.status.toLowerCase()}`}>
+                    {post.status}
+                  </span>
+                  <span className="date">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
 
-              <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+                <div className="post-actions">
+                  <button onClick={() => navigate(`/posts/${post.id}/edit`)}>
+                    Edit
+                  </button>
 
-              <div className="post-actions">
-                <button onClick={() => navigate(`/posts/${post.id}/edit`)}>
-                  Edit
-                </button>
+                  <button
+                    onClick={() => handleToggleStatus(post.id, post.status)}
+                    disabled={togglingId === post.id}
+                    className="toggle-status-btn"
+                  >
+                    {togglingId === post.id
+                      ? "Updating..."
+                      : `→ ${getNextStatus(post.status)}`}
+                  </button>
 
-                <button
-                  onClick={() => handleToggleStatus(post.id, post.status)}
-                  disabled={togglingId === post.id}
-                  className="toggle-status-btn"
-                >
-                  {togglingId === post.id
-                    ? "Updating..."
-                    : `→ ${getNextStatus(post.status)}`}
-                </button>
-
-                <button
-                  onClick={() => handleDelete(post.id)}
-                  disabled={deletingId === post.id}
-                  style={{ backgroundColor: "#ef4444", color: "white" }}
-                >
-                  {deletingId === post.id ? "Deleting..." : "Delete"}
-                </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    disabled={deletingId === post.id}
+                    className="delete-btn"
+                  >
+                    {deletingId === post.id ? "Deleting..." : "Delete"}
+                  </button>
+                </div>
               </div>
             </div>
           ))}

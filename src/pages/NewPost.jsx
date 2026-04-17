@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+
+import "../styles/pages/NewPost.css";
+
 const BASE_URL = import.meta.env.VITE_LOCAL_API_URL;
 
 function NewPost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [status, setStatus] = useState("DRAFT");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -25,11 +29,7 @@ function NewPost() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          title,
-          content,
-          // status defaults to DRAFT on backend
-        }),
+        body: JSON.stringify({ title, content, status }),
       });
 
       const data = await response.json();
@@ -40,7 +40,6 @@ function NewPost() {
 
       setSuccess(true);
 
-      // Redirect to dashboard after 1.5 seconds
       setTimeout(() => {
         navigate("/dashboard");
       }, 1500);
@@ -53,19 +52,18 @@ function NewPost() {
 
   return (
     <div className="new-post-container">
-      <h1>Create New Post</h1>
-
       {success && (
-        <p style={{ color: "green", fontWeight: "bold" }}>
+        <p className="success-message">
           Post created successfully! Redirecting...
         </p>
       )}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Title</label>
+      <form onSubmit={handleSubmit} className="new-post-form">
+        <div className="form-grid">
+          {/* Row 1: Title */}
+          <label className="form-label">Title</label>
           <input
             type="text"
             value={title}
@@ -73,26 +71,39 @@ function NewPost() {
             placeholder="Enter post title"
             required
           />
-        </div>
 
-        <div className="form-group">
-          <label>Content</label>
+          {/* Row 2: Content */}
+          <label className="form-label">Content</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write your post content here..."
-            rows="15"
+            rows="16"
             required
           />
-        </div>
 
-        <div className="form-actions">
-          <button type="button" onClick={() => navigate("/dashboard")}>
-            Cancel
-          </button>
-          <button type="submit" disabled={loading}>
-            {loading ? "Creating Post..." : "Publish Post"}
-          </button>
+          {/* Row 3: Status + Buttons */}
+          <label className="form-label">Status</label>
+          <div className="status-and-actions">
+            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="ARCHIVED">Archived</option>
+            </select>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                onClick={() => navigate("/dashboard")}
+                className="cancel-btn"
+              >
+                Cancel
+              </button>
+              <button type="submit" disabled={loading} className="submit-btn">
+                {loading ? "Creating Post..." : "Publish Post"}
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>

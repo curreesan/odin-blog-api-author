@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+
+import "../styles/pages/EditPost.css";
+
 const BASE_URL = import.meta.env.VITE_LOCAL_API_URL;
 
 function EditPost() {
-  const { id } = useParams(); // Gets the post id from URL
+  const { id } = useParams();
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -15,19 +18,14 @@ function EditPost() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  // Fetch the post when component loads
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/posts/${id}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         const data = await response.json();
-        console.log("edit post", data);
 
         if (!response.ok) throw new Error("Failed to load post");
 
@@ -74,46 +72,53 @@ function EditPost() {
   if (error) return <h2 style={{ color: "red" }}>Error: {error}</h2>;
 
   return (
-    <div className="new-post-container">
-      <h1>Edit Post</h1>
+    <div className="edit-post-container">
+      {error && <p className="error-message">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Title</label>
+      <form onSubmit={handleSubmit} className="edit-post-form">
+        <div className="form-grid">
+          {/* Row 1: Title */}
+          <label className="form-label">Title</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter post title"
             required
           />
-        </div>
 
-        <div className="form-group">
-          <label>Status</label>
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="DRAFT">Draft</option>
-            <option value="PUBLISHED">Published</option>
-            <option value="ARCHIVED">Archived</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Content</label>
+          {/* Row 2: Content */}
+          <label className="form-label">Content</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            rows="15"
+            placeholder="Write your post content here..."
+            rows="16"
             required
           />
-        </div>
 
-        <div className="form-actions">
-          <button type="button" onClick={() => navigate("/dashboard")}>
-            Cancel
-          </button>
-          <button type="submit" disabled={saving}>
-            {saving ? "Saving Changes..." : "Update Post"}
-          </button>
+          {/* Row 3: Status + Buttons */}
+          <label className="form-label">Status</label>
+          <div className="status-and-actions">
+            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="ARCHIVED">Archived</option>
+            </select>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                onClick={() => navigate("/dashboard")}
+                className="cancel-btn"
+              >
+                Cancel
+              </button>
+              <button type="submit" disabled={saving} className="submit-btn">
+                {saving ? "Saving Changes..." : "Update Post"}
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
